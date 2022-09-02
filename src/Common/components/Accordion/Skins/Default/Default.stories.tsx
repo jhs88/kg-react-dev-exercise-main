@@ -4,23 +4,28 @@ import { STORYBOOK_FOLDERS } from 'Common/constants/storybook.constants';
 
 import DefaultSkin from './Default';
 import { AccordionSkinProps } from '../../Accordion.interfaces';
+import AccordionItem from './DefaultItem';
 
 export default {
   title: `${STORYBOOK_FOLDERS.DESIGN_SYSTEM}/${STORYBOOK_FOLDERS.COMMON}/${STORYBOOK_FOLDERS.COMPONENTS}/Accordion`,
   component: DefaultSkin,
+  subcomponent: { AccordionItem },
   args: {
-    content: '<p>This is a test.</p>',
     header: 'Header',
     subheader: 'Subheader',
-    accHeader: 'Item Header',
-    accContent: 'Content goes here.',
+    items: [
+      {
+        id: 1,
+        header: 'Item Header',
+        headerImg: './img/avatar/av1.png',
+        content: 'Content goes here.',
+      },
+    ],
   },
   argTypes: {
-    content: { name: 'Page Content' },
     header: { name: 'Header' },
     subheader: { name: 'Subheader' },
-    accHeader: { name: 'Accordion Item Header' },
-    accContent: { name: 'Accordion Item Content' },
+    items: { name: 'Accordion Items' },
   },
 } as Meta;
 

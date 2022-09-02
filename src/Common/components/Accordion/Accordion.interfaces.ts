@@ -5,8 +5,14 @@ export enum AC_SKIN_NAMES {
 export interface AccordionSkinProps {
   header: string;
   subheader: string;
-  accHeader: string;
-  accContent: string;
+  items: AccordionItemProps[];
+}
+
+export interface AccordionItemProps {
+  id: number;
+  header?: string;
+  headerImg?: string;
+  content: string;
 }
 
 export interface AccordionProps {

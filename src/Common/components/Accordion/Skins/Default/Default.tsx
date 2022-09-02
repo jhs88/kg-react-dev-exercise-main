@@ -1,48 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { AccordionSkinProps } from '../../Accordion.interfaces';
 
-export const AccordionItem: React.FC<{
-  header: string;
-  content: string;
-}> = ({ header, content }) => {
-  if (header) {
-    return (
-      <div className="accordion-item">
-        <p className="accordion-header" id="heading-21">
-          <button
-            className="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapse-1"
-            aria-expanded="true"
-            aria-controls="collapse-1"
-          >
-            <img src="./img/avatar/av1.png" className="thumbnail" alt="" />
-            {header}
-          </button>
-        </p>
-        <div
-          id="collapse-1"
-          className="accordion-collapse collapse"
-          aria-labelledby="heading-21"
-          data-bs-parent="#accordionSk2"
-        >
-          <div className="accordion-body">
-            <div className="accordion-text">{content}</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  return <></>;
-};
+import { AccordionSkinProps } from '../../Accordion.interfaces';
+import AccordionItem from './DefaultItem';
 
 const DefaultSkin: React.FC<AccordionSkinProps> = ({
   header,
   subheader,
-  accHeader,
-  accContent,
+  items,
 }: AccordionSkinProps) => {
   if (header) {
     return (
@@ -67,6 +32,7 @@ const DefaultSkin: React.FC<AccordionSkinProps> = ({
 
           <link rel="stylesheet" href="./css/global.css" />
           <title>Accordion</title>
+          <script src="./js/bootstrap.bundle.js" />
         </Helmet>
         <h4 className="container mt-50">{header}</h4>
         <h5 className="container my-50">{subheader}</h5>
@@ -74,12 +40,19 @@ const DefaultSkin: React.FC<AccordionSkinProps> = ({
           <div className="accordionSk2" id="accordionSk2">
             <div className="sectionBody">
               <div className="col-lg-10 mx-auto">
-                <AccordionItem header={accHeader} content={accContent} />
+                {Array.from(items).map((item) => (
+                  <AccordionItem
+                    key={item.id}
+                    id={item.id}
+                    header={item.header}
+                    headerImg={item.headerImg}
+                    content={item.content}
+                  />
+                ))}
               </div>
             </div>
           </div>
         </section>
-        <script src="./js/bootstrap.bundle.js" />
       </>
     );
   }
